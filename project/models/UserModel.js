@@ -19,10 +19,14 @@ const userSchema = new mongoose.Schema({
 		type:String,
 		required:true,
 	},
+	role:{
+		type:String,
+		required:true,
+	},
 	},{
 	toJSON:{
 		transform: (doc,ret)=>{
-			const dataToReturn = _.pick(ret,['_id','username','email'])
+			const dataToReturn = _.pick(ret,['_id','username','email','role'])
 			return dataToReturn;
 		}
 	}

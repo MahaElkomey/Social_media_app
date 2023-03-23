@@ -1,6 +1,8 @@
 const joi = require('joi');
 const jwt = require('jsonwebtoken');
 const UserModel = require('../models/UserModel.js');
+const User = require('../models/UserModel.js');
+const { ROLE } = require('../helpers/usreRole');
 const jwtSecret = process.env.JWT_SECRET;
 
 
@@ -8,7 +10,8 @@ const jwtSecret = process.env.JWT_SECRET;
 const signupSchema = joi.object({
     username:joi.string().required(),
     email:joi.string().required(),
-    password:joi.string().required()
+    password:joi.string().required(),
+    role:joi.string().required()
 
 })
 const signupValidate = (req,res,next)=>{
@@ -106,4 +109,36 @@ const authorizedUser = async (req,res,next)=>{
     next() 
 }
 
-module.exports = { signinValidate,signupValidate,authorizedUser,createPostValidate,createCommentValidate,createReviewValidate }
+//just admin and user his self can get user by id 
+function canGetUser(user,role,searchID) {
+    console.log(role);
+    return (
+      role === ROLE.ADMIN ||
+      user._id === searchID
+    )
+}
+const authGetUser = async (req, res, next) =>{
+    //console.log(req.user, req.params.id);
+    const user = await User.findById(req.user._id);
+    const role = user.role;
+    console.log("user_id " + (JSON.stringify(user._id)));
+    console.log("user_id " + (JSON.stringify(req.params.id)));
+    if (role === ROLE.ADMIN || JSON.stringify(user._id) === JSON.stringify(req.params.id)) {
+        next();
+    }
+    else{
+        const error = new Error('unauthorized maha');
+        error.statusCode = 401; 
+        return next(error);
+    }
+  }
+
+module.exports = { 
+    signinValidate,
+    signupValidate,
+    authorizedUser,
+    createPostValidate,
+    createCommentValidate,
+    createReviewValidate,
+    authGetUser
+ }
