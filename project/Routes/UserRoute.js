@@ -1,5 +1,8 @@
 const express = require('express');
 const User = require('../models/UserModel.js');
+const postData = require('../models/PostModel.js');
+const commentData = require('../models/CommentModel');
+const reviewData = require('../models/ReviewModel');
 const validator = require('../middelWare/validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -43,8 +46,25 @@ users.post("/singin",validator.signinValidate,async (req, res,next) => {
 //get user using id
 users.get("/:id", validator.authorizedUser,validator.authUser,async (req, res,next) => {
     const user = await User.findById(req.params.id);
-    res.send(user);
-    
+    const posts = await postData.find({user:user._id}).populate('user');
+    var allPostsWithComment = [];
+    for (var i = 0; i < posts.length; i++){
+        const postComments  = await commentData.find({postID:posts[i]._id});
+        const postReviews  = await reviewData.find({postID:posts[i]._id});
+        const all = {
+            post:posts[i],
+            postComments,
+            postReviews
+        }
+        allPostsWithComment.push(all);
+    }
+    console.log((allPostsWithComment));
+    const sendData = {
+        user,
+        allPostsWithComment
+    }
+	res.send(sendData);
+
 });
 
 //update user using id
