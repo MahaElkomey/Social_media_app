@@ -68,6 +68,23 @@ const createCommentValidate = (req,res,next)=>{
     next();
 }
 
+// create review validation
+const createReviewSchema = joi.object({
+    rate:joi.number().required()
+
+})
+const createReviewValidate = (req,res,next)=>{
+    const {error} = createReviewSchema.validate(req.body);
+    if(error){
+        const err = new Error(error.details[0].message);
+        error.statusCode = 400;
+        return next(error);
+    }
+    req.post = req.headers.post;
+    next();
+}
+
+
 // to check is that user authrized or not to creating,updating and deleting todo apis 
 const authorizedUser = async (req,res,next)=>{
     const token = req.headers.authorization;
@@ -89,4 +106,4 @@ const authorizedUser = async (req,res,next)=>{
     next() 
 }
 
-module.exports = { signinValidate,signupValidate,authorizedUser,createPostValidate,createCommentValidate }
+module.exports = { signinValidate,signupValidate,authorizedUser,createPostValidate,createCommentValidate,createReviewValidate }

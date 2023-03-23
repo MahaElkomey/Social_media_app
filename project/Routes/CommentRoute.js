@@ -6,7 +6,7 @@ const validator = require('../middelWare/validator');
 const jwt = require('jsonwebtoken');
 const commentRoute = express.Router();
 
-//create todo
+//create comment
 commentRoute.post("", 
 // to check if the user is authorized or not
 validator.authorizedUser,
@@ -45,7 +45,7 @@ commentRoute.patch("/:id", validator.authorizedUser, async (req, res) => {
     });
 });
 
-//delete post using id
+//delete comment using id
 commentRoute.delete("/:id", validator.authorizedUser,async (req, res) => {
     const commentdeleted = await commentData.findByIdAndDelete(req.params.id,{new:true});
     const postComment = await postData.findById(req.headers.post);
