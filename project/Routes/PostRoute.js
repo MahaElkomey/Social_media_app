@@ -56,7 +56,7 @@ PostRoute.get("/:id", async (req, res) => {
 });
 
 //update post using id
-PostRoute.patch("/:id", validator.authorizedUser, async (req, res) => {
+PostRoute.patch("/:id", validator.authorizedUser,validator.authUser, async (req, res) => {
     const postUpdated = await postData.findByIdAndUpdate(req.params.id,req.body,{new:true});
     const userPost = req.user;
     res.json({
@@ -66,7 +66,7 @@ PostRoute.patch("/:id", validator.authorizedUser, async (req, res) => {
 });
 
 //delete post using id
-PostRoute.delete("/:id", validator.authorizedUser,async (req, res) => {
+PostRoute.delete("/:id", validator.authorizedUser,validator.authUser,async (req, res) => {
     const postdeleted = await postData.findByIdAndDelete(req.params.id,{new:true});
     const userPost = req.user;
     res.json({

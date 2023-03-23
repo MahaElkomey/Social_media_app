@@ -109,20 +109,10 @@ const authorizedUser = async (req,res,next)=>{
     next() 
 }
 
-//just admin and user his self can get user by id 
-function canGetUser(user,role,searchID) {
-    console.log(role);
-    return (
-      role === ROLE.ADMIN ||
-      user._id === searchID
-    )
-}
-const authGetUser = async (req, res, next) =>{
-    //console.log(req.user, req.params.id);
+//just admin and user his self can get,update,delete user by id 
+const authUser = async (req, res, next) =>{
     const user = await User.findById(req.user._id);
     const role = user.role;
-    console.log("user_id " + (JSON.stringify(user._id)));
-    console.log("user_id " + (JSON.stringify(req.params.id)));
     if (role === ROLE.ADMIN || JSON.stringify(user._id) === JSON.stringify(req.params.id)) {
         next();
     }
@@ -131,7 +121,8 @@ const authGetUser = async (req, res, next) =>{
         error.statusCode = 401; 
         return next(error);
     }
-  }
+}
+
 
 module.exports = { 
     signinValidate,
@@ -140,5 +131,5 @@ module.exports = {
     createPostValidate,
     createCommentValidate,
     createReviewValidate,
-    authGetUser
+    authUser
  }

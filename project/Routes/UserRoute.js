@@ -41,20 +41,20 @@ users.post("/singin",validator.signinValidate,async (req, res,next) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //get user using id
-users.get("/:id", validator.authorizedUser,validator.authGetUser,async (req, res,next) => {
+users.get("/:id", validator.authorizedUser,validator.authUser,async (req, res,next) => {
     const user = await User.findById(req.params.id);
     res.send(user);
     
 });
 
 //update user using id
-users.patch("/:id", validator.authorizedUser,validator.authGetUser,async (req, res,next) => {
+users.patch("/:id", validator.authorizedUser,validator.authUser,async (req, res,next) => {
     const userUpdated = await User.findByIdAndUpdate(req.params.id,req.body,{new:true});
     res.send(userUpdated);
 });
 
 //delete user using id
-users.delete("/:id",validator.authorizedUser,validator.authGetUser,async (req, res,next) => {
+users.delete("/:id",validator.authorizedUser,validator.authUser,async (req, res,next) => {
     const userdeleted = await User.findByIdAndDelete(req.params.id,{new:true});
     res.send(userdeleted);
     
