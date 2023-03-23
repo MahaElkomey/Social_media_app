@@ -6,12 +6,14 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 app.use(morgan('combined'));
-const todos = require('./Routes/Todo.js');
-const users = require('./Routes/User');
+const PostRoute = require('./Routes/PostRoute.js');
+const commentRoute = require('./Routes/CommentRoute');
+const users = require('./Routes/UserRoute.js');
 const cors = require('cors');
 const mongoURL = process.env.MONGO_URL;
 mongoose.connect(mongoURL);
-app.use('/todo',todos);
+app.use('/comment',commentRoute);
+app.use('/post',PostRoute);
 app.use('/user',users);
 const port = process.env.PORT
 console.log(port);

@@ -1,5 +1,5 @@
 const express = require('express');
-const User = require('../models/User.js');
+const User = require('../models/UserModel.js');
 const validator = require('../middelWare/validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');

@@ -1,6 +1,6 @@
 const joi = require('joi');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User.js');
+const UserModel = require('../models/UserModel.js');
 const jwtSecret = process.env.JWT_SECRET;
 
 
@@ -37,18 +37,35 @@ const signinValidate = (req,res,next)=>{
     next();
 }
 
-// create todo validation
-const createTodoSchema = joi.object({
-    title:joi.string().required()
+// create post validation
+const createPostSchema = joi.object({
+    body:joi.string().required()
 
 })
-const createTodoValidate = (req,res,next)=>{
-    const {error} = createTodoSchema.validate(req.body);
+const createPostValidate = (req,res,next)=>{
+    const {error} = createPostSchema.validate(req.body);
     if(error){
         const err = new Error(error.details[0].message);
         error.statusCode = 400;
         return next(error);
     }
+    next();
+}
+
+// create comment validation
+const createCommentSchema = joi.object({
+    comment:joi.string().required()
+
+})
+const createCommentValidate = (req,res,next)=>{
+    const {error} = createCommentSchema.validate(req.body);
+    if(error){
+        const err = new Error(error.details[0].message);
+        error.statusCode = 400;
+        return next(error);
+    }
+    req.post = req.headers.post;
+    console.log("post : "+ req.headers.post);
     next();
 }
 
@@ -62,7 +79,7 @@ const authorizedUser = async (req,res,next)=>{
     }
     const { id } = jwt.verify(token,jwtSecret);
     console.log(id);
-    const user = await User.findById(id);
+    const user = await UserModel.findById(id);
     console.log(user);
     if(!user){
         const error = new Error('unauthorized');
@@ -70,7 +87,8 @@ const authorizedUser = async (req,res,next)=>{
         return next(error);
     }
     req.user = user;
+    console.log("id : "+ req.user);
     next() 
 }
 
-module.exports = { signinValidate,signupValidate,authorizedUser,createTodoValidate }
+module.exports = { signinValidate,signupValidate,authorizedUser,createPostValidate,createCommentValidate }
