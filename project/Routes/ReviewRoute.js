@@ -36,7 +36,7 @@ reviewRoute.get("/:id", async (req, res) => {
 });
 
 //update review using id
-reviewRoute.patch("/:id", validator.authorizedUser, async (req, res) => {
+reviewRoute.patch("/:id", validator.authorizedUser,validator.authUser, async (req, res) => {
     const reviewUpdated = await reviewData.findByIdAndUpdate(req.params.id,req.body,{new:true});
     const postReview = await postData.findById(req.headers.post);
     res.json({
@@ -46,7 +46,7 @@ reviewRoute.patch("/:id", validator.authorizedUser, async (req, res) => {
 });
 
 //delete review using id
-reviewRoute.delete("/:id", validator.authorizedUser,async (req, res) => {
+reviewRoute.delete("/:id", validator.authorizedUser,validator.authUser,async (req, res) => {
     const reviewdeleted = await reviewData.findByIdAndDelete(req.params.id,{new:true});
     const postReview = await postData.findById(req.headers.post);
     res.json({
