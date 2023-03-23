@@ -1,5 +1,6 @@
 const express = require('express');
 const postData = require('../models/PostModel.js');
+const commentData = require('../models/CommentModel');
 const User = require('../models/UserModel.js');
 const validator = require('../middelWare/validator');
 const jwt = require('jsonwebtoken');
@@ -23,7 +24,17 @@ validator.createPostValidate
 //get post with filter for user id
 PostRoute.get("/", validator.authorizedUser,async (req, res) => {
     const posts = await postData.find({user:req.user._id}).populate('user');
-	res.send(posts);
+    var allPostsWithComment = [];
+    for (var i = 0; i < posts.length; i++){
+        const postComments  = await commentData.find({postID:posts[i]._id});
+        const all = {
+            post:posts[i],
+            postComments
+        }
+        
+        allPostsWithComment.push(all);
+    }
+	res.send(allPostsWithComment);
     
 });
 

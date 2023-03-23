@@ -65,7 +65,6 @@ const createCommentValidate = (req,res,next)=>{
         return next(error);
     }
     req.post = req.headers.post;
-    console.log("post : "+ req.headers.post);
     next();
 }
 
@@ -87,7 +86,6 @@ const authorizedUser = async (req,res,next)=>{
         return next(error);
     }
     req.user = user;
-    console.log("id : "+ req.user);
     next() 
 }
 
