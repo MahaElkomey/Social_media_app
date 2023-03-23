@@ -1,6 +1,7 @@
 const express = require('express');
 const postData = require('../models/PostModel.js');
 const commentData = require('../models/CommentModel');
+const reviewData = require('../models/ReviewModel');
 const User = require('../models/UserModel.js');
 const validator = require('../middelWare/validator');
 const jwt = require('jsonwebtoken');
@@ -27,9 +28,11 @@ PostRoute.get("/", validator.authorizedUser,async (req, res) => {
     var allPostsWithComment = [];
     for (var i = 0; i < posts.length; i++){
         const postComments  = await commentData.find({postID:posts[i]._id});
+        const postReviews  = await reviewData.find({postID:posts[i]._id});
         const all = {
             post:posts[i],
-            postComments
+            postComments,
+            postReviews
         }
         
         allPostsWithComment.push(all);
@@ -41,8 +44,14 @@ PostRoute.get("/", validator.authorizedUser,async (req, res) => {
 //get post using id
 PostRoute.get("/:id", async (req, res) => {
     const post = await postData.findById(req.params.id);
-    console.log(post);
-    res.send(post);
+    const postComments  = await commentData.find({postID:post._id});
+    const postReviews  = await reviewData.find({postID:post._id});
+    const all = {
+        post,
+        postComments,
+        postReviews
+    }
+    res.send(all);
     
 });
 
