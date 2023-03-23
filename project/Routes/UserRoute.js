@@ -42,8 +42,7 @@ users.post("/singin",validator.signinValidate,async (req, res,next) => {
     
 });
 
-/////////////////////////////////////////////////////////////////////////////////////////
-//get user using id
+//get user using id and get all his/her posts with comments and reviews
 users.get("/:id", validator.authorizedUser,validator.authUser,async (req, res,next) => {
     const user = await User.findById(req.params.id);
     const posts = await postData.find({user:user._id}).populate('user');
