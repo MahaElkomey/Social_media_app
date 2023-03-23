@@ -36,7 +36,7 @@ commentRoute.get("/:id", async (req, res) => {
 });
 
 //update comment using id
-commentRoute.patch("/:id", validator.authorizedUser, async (req, res) => {
+commentRoute.patch("/:id", validator.authorizedUser,validator.authUser, async (req, res) => {
     const commentUpdated = await commentData.findByIdAndUpdate(req.params.id,req.body,{new:true});
     const postComment = await postData.findById(req.headers.post);
     res.json({
@@ -46,7 +46,7 @@ commentRoute.patch("/:id", validator.authorizedUser, async (req, res) => {
 });
 
 //delete comment using id
-commentRoute.delete("/:id", validator.authorizedUser,async (req, res) => {
+commentRoute.delete("/:id", validator.authorizedUser,validator.authUser,async (req, res) => {
     const commentdeleted = await commentData.findByIdAndDelete(req.params.id,{new:true});
     const postComment = await postData.findById(req.headers.post);
     res.json({
