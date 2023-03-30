@@ -48,13 +48,13 @@ This is a Node.js application that implements a Social Media Backend Server. It 
 
  ``` sh
 git clone https://github.com/MahaElomey/Social_media_app
-
+```
 
 2. Install the project dependencies using the following command:
 
 ``` sh
 npm install
-
+```
 
 3. Create a .env file in the root directory of the project, and add the following environment variables:
 
@@ -67,7 +67,7 @@ npm install
  ##### CLOUDINARY_CLOUD_NAME=<your_cloud_name>
  ##### CLOUDINARY_API_KEY=<your_cloud_api_key>
  ##### CLOUDINARY_API_SECRETKEY=<your_cloud_api_secret_key>
-
+```
 
 
 
@@ -77,7 +77,7 @@ The server will start running on `http://localhost:4000` by default.
 
 ``` sh
 npm start
-
+```
 
 5. Use the API routes with a tool like Postman or Thunder Client.
 
