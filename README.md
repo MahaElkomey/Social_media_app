@@ -63,6 +63,11 @@ PORT=<choose port to run your app on it>
 DB_URL=<your_mongodb_connection_string>
 JWT_SECRET=<your-jwt-secret>
 SALR_ROUND=<your_salt_round_number>
+CLOUDINARY_CLOUD_NAME=<your_cloud_name>
+CLOUDINARY_API_KEY=<your_cloud_api_key>
+CLOUDINARY_API_SECRETKEY=VDW333LN22K9GziOXxthlI5wr2I
+
+
 
 
 4. Start the server:
