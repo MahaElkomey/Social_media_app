@@ -39,7 +39,7 @@ This is a Node.js application that implements a Social Media Backend Server. It 
 
 1. Clone the repository to your local machine.
 2. Run npm install to install the required dependencies.
-3. Create a .env file in the project's root directory and set your environment variables (such as the database URL, JWT secret, salt_round, and app_port).
+3. Create a .env file in the project's root directory and set your environment variables (such as the database URL, JWT secret, salt_round, , app_port,cloudinary_cloud_name,cloudinary_api_key and cloudinary_api_keysecret).
 4. Run npm start to start the server.
 
 ## Getting Started
