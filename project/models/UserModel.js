@@ -23,11 +23,17 @@ const userSchema = new mongoose.Schema({
 		type:String,
 		required:true,
 	},
+	
+	photoURL:{
+		type:String
+	}
 	},{
 	toJSON:{
 		transform: (doc,ret)=>{
-			const dataToReturn = _.pick(ret,['_id','username','email','role'])
+			const dataToReturn = _.pick(ret,['_id','username','email','role','photoURL'])
 			return dataToReturn;
+
+			
 		}
 	}
 });

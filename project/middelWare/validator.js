@@ -113,6 +113,7 @@ const authorizedUser = async (req,res,next)=>{
 }
 
 //just admin and user himself can get,update,delete user by id 
+
 const authUser = async (req, res, next) =>{
     const user = await User.findById(req.user._id);
     const role = user.role;
