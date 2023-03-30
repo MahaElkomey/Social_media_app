@@ -90,7 +90,7 @@ npm start
 - `PATCH /user/:id` - Update a specific user by ID.
 - `DELETE /user/:id` - Delete a specific user by ID.
 
-Posts
+### Posts Routes
 
 - `POST /post` - Create a new post.
 - `GET /post` - Get post with filter for user id.
@@ -98,7 +98,7 @@ Posts
 - `PATCH /post/:id` - Update a specific post by ID.
 - `DELETE /post/:id` - Delete a specific post by ID.
 
-Comments
+### Comments Routes
 
 - `POST /comment` - Create a new comment for specific post (post data are in request header).
 - `GET /comment` - Get a list of all comments for specific post.
@@ -106,7 +106,7 @@ Comments
 - `PATCH /comment/:Id` - Update a specific comment by ID for specific post.
 - `DELETE /comment/:Id` - Delete a specific comment by ID for specific post.
 
-Reviews
+### Reviews Routes
 
 - `POST /review` - Create a new review for specific post (post data are in request header).
 - `GET /review` - Get a list of all reviews for specific post.
