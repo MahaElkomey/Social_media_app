@@ -11,17 +11,18 @@ const signupSchema = joi.object({
     username:joi.string().required(),
     email:joi.string().required(),
     password:joi.string().required(),
-    role:joi.string().required()
+    role:joi.string().required(),
+    avatar:joi.string()
 
 })
-const signupValidate = (req,res,next)=>{
-    const {error} = signupSchema.validate(req.body);
+const signupValidate = async (req)=>{
+    const {error} = await signupSchema.validate(req.body);
+
     if(error){
         const err = new Error(error.details[0].message);
         error.statusCode = 400;
         return next(error);
     }
-    next();
 }
 
 // sign in validation 
