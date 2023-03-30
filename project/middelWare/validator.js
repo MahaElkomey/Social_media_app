@@ -101,6 +101,8 @@ const authorizedUser = async (req,res,next)=>{
     console.log(id);
     const user = await UserModel.findById(id);
     console.log(user);
+
+
     if(!user){
         const error = new Error('unauthorized');
         error.statusCode = 401; 
