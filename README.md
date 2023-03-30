@@ -65,7 +65,7 @@ JWT_SECRET=<your-jwt-secret>
 SALR_ROUND=<your_salt_round_number>
 CLOUDINARY_CLOUD_NAME=<your_cloud_name>
 CLOUDINARY_API_KEY=<your_cloud_api_key>
-CLOUDINARY_API_SECRETKEY=VDW333LN22K9GziOXxthlI5wr2I
+CLOUDINARY_API_SECRETKEY=<your_cloud_api_secret_key>
 
 
 
