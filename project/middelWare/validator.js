@@ -12,7 +12,7 @@ const signupSchema = joi.object({
     email:joi.string().required(),
     password:joi.string().required(),
     role:joi.string().required(),
-    avatar:joi.string()
+    avatar:joi.string()         //it's optional so you don't need to make it required
 
 })
 const signupValidate = async (req)=>{
