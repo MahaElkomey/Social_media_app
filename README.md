@@ -46,19 +46,19 @@ This is a Node.js application that implements a Social Media Backend Server. It 
 
 1. Clone the repository to your local machine using the following command:
 
- sh
+ ``` sh
 git clone https://github.com/MahaElomey/Social_media_app
 
 
 2. Install the project dependencies using the following command:
 
- sh
+``` sh
 npm install
 
 
 3. Create a .env file in the root directory of the project, and add the following environment variables:
 
- sh
+``` sh
 
  ##### PORT=<choose_port_to_run_your_app_on_it>
  ##### DB_URL=<your_mongodb_connection_string>
@@ -75,7 +75,7 @@ npm install
 
 The server will start running on `http://localhost:4000` by default.
 
- sh
+``` sh
 npm start
 
 
