@@ -112,7 +112,7 @@ const authorizedUser = async (req,res,next)=>{
     next() 
 }
 
-//just admin and user his self can get,update,delete user by id 
+//just admin and user himself can get,update,delete user by id 
 const authUser = async (req, res, next) =>{
     const user = await User.findById(req.user._id);
     const role = user.role;
